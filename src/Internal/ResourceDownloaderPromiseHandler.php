@@ -52,6 +52,7 @@ final class ResourceDownloaderPromiseHandler implements ResourceDownloaderPromis
         try {
             $content = $this->validateResponse($response, $uuid);
             $this->handler->onSuccess($uuid, $content, $response);
+            
         } catch (ResourceDownloadResponseError $exception) {
             return $this->handlerError($exception);
         } catch (Throwable $exception) {

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PhpCfdi\CfdiSatScraper\Internal;
 
 use PhpCfdi\CfdiSatScraper\Contracts\ResourceDownloadHandlerInterface;
+use PhpCfdi\CfdiSatScraper\Exceptions\ResourceDownloadResponseError;
 use PhpCfdi\CfdiSatScraper\Contracts\ResourceFileNamerInterface;
 use PhpCfdi\CfdiSatScraper\Exceptions\InvalidArgumentException;
 use PhpCfdi\CfdiSatScraper\Exceptions\ResourceDownloadError;
@@ -93,7 +94,9 @@ final class ResourceDownloadStoreInFolder implements ResourceDownloadHandlerInte
     public function onSuccess(string $uuid, string $content, ResponseInterface $response): void
     {
         $destinationFile = $this->pathFor($uuid);
+        throw ResourceDownloadResponseError::contentIsNotCfdi($response, $destinationFile);
         $this->filePutContents($destinationFile, $content);
+
     }
 
     /**
