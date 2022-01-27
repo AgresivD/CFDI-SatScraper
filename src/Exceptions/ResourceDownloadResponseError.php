@@ -48,6 +48,6 @@ class ResourceDownloadResponseError extends ResourceDownloadError
         if ($throwable instanceof self) {
             return $throwable;
         }
-        return new self(sprintf('Download of CFDI %s Throwable happend v2.0 %s', $uuid, $throwable->getTraceAsString()), $uuid, $response, $throwable);
+        return new self(sprintf('Download of CFDI %s was unable to handle fulfill %s', $uuid, $throwable->getTraceAsString()), $uuid, $response, $throwable);
     }
 }
