@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PhpCfdi\CfdiSatScraper\Internal;
 
 use PhpCfdi\CfdiSatScraper\Contracts\ResourceDownloadHandlerInterface;
-use PhpCfdi\CfdiSatScraper\Exceptions\ResourceDownloadResponseError;
 use PhpCfdi\CfdiSatScraper\Contracts\ResourceFileNamerInterface;
 use PhpCfdi\CfdiSatScraper\Exceptions\InvalidArgumentException;
 use PhpCfdi\CfdiSatScraper\Exceptions\ResourceDownloadError;
@@ -54,8 +53,6 @@ final class ResourceDownloadStoreInFolder implements ResourceDownloadHandlerInte
 
     public function pathFor(string $uuid): string
     {
-        throw ResourceDownloadResponseError::emptyContent($response, "dest: ".$this->getDestinationFolder()." | name_for: ".$this->resourceFileNamer->nameFor($uuid));
-        
         return $this->getDestinationFolder() . DIRECTORY_SEPARATOR . $this->resourceFileNamer->nameFor($uuid);
     }
 
