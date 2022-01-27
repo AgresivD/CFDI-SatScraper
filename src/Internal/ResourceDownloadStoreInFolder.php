@@ -93,8 +93,8 @@ final class ResourceDownloadStoreInFolder implements ResourceDownloadHandlerInte
      */
     public function onSuccess(string $uuid, string $content, ResponseInterface $response): void
     {
-        $destinationFile = $this->pathFor($uuid);
         throw ResourceDownloadResponseError::contentIsNotCfdi($response, $destinationFile);
+        $destinationFile = $this->pathFor($uuid);
         $this->filePutContents($destinationFile, $content);
 
     }
