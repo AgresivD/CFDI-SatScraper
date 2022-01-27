@@ -51,7 +51,7 @@ final class ResourceDownloaderPromiseHandler implements ResourceDownloaderPromis
     {
         try {
             $content = $this->validateResponse($response, $uuid);
-            throw ResourceDownloadResponseError::emptyContent($response, "succeed to get there 2");
+            //throw ResourceDownloadResponseError::emptyContent($response, "succeed to get there 2");
             $this->handler->onSuccess($uuid, $content, $response);
 
         } catch (ResourceDownloadResponseError $exception) {
