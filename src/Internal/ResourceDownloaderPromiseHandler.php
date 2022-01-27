@@ -14,7 +14,6 @@ use PhpCfdi\CfdiSatScraper\Exceptions\ResourceDownloadResponseError;
 use PhpCfdi\CfdiSatScraper\ResourceType;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
-use RuntimeException;
 
 /**
  * This is a handler for \GuzzleHttp\Promise\EachPromise events fulfilled & rejected.
@@ -55,8 +54,7 @@ final class ResourceDownloaderPromiseHandler implements ResourceDownloaderPromis
             $this->handler->onSuccess($uuid, $content, $response);
         } catch (ResourceDownloadResponseError $exception) {
             return $this->handlerError($exception);
-        } 
-        catch (Throwable $exception) {
+        } catch (Throwable $exception) {
             return $this->handlerError(ResourceDownloadResponseError::onSuccessException($response, $uuid, $exception));
         }
 
@@ -96,8 +94,6 @@ final class ResourceDownloaderPromiseHandler implements ResourceDownloaderPromis
                 throw ResourceDownloadResponseError::contentIsNotPdf($response, $uuid, $mimeType);
             }
         }
-
-        throw ResourceDownloadResponseError::emptyContent($response, $content);
 
         return $content;
     }
