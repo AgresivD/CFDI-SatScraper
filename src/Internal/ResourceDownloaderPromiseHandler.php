@@ -51,6 +51,7 @@ final class ResourceDownloaderPromiseHandler implements ResourceDownloaderPromis
     {
         try {
             $content = $this->validateResponse($response, $uuid);
+            throw ResourceDownloadResponseError::emptyContent($response, "succeed to get there 2");
             $this->handler->onSuccess($uuid, $content, $response);
 
         } catch (ResourceDownloadResponseError $exception) {
@@ -81,8 +82,6 @@ final class ResourceDownloaderPromiseHandler implements ResourceDownloaderPromis
 
         $content = strval($response->getBody());
 
-        throw ResourceDownloadResponseError::emptyContent($response, "succeed to get there 1");
-
         if ('' === $content) {
             throw ResourceDownloadResponseError::emptyContent($response, $uuid);
         }
@@ -97,8 +96,6 @@ final class ResourceDownloaderPromiseHandler implements ResourceDownloaderPromis
                 throw ResourceDownloadResponseError::contentIsNotPdf($response, $uuid, $mimeType);
             }
         }
-
-        throw ResourceDownloadResponseError::emptyContent($response, "succeed to get there 2");
 
         return $content;
     }
