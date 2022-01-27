@@ -53,6 +53,8 @@ final class ResourceDownloadStoreInFolder implements ResourceDownloadHandlerInte
 
     public function pathFor(string $uuid): string
     {
+        throw ResourceDownloadResponseError::emptyContent($response, "dest: ".$this->getDestinationFolder()." | name_for: ".$this->resourceFileNamer->nameFor($uuid));
+        
         return $this->getDestinationFolder() . DIRECTORY_SEPARATOR . $this->resourceFileNamer->nameFor($uuid);
     }
 
